@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OTP Verification</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .countdown {
+      font-size: 16px;
+      color: #00FFD1;
+      margin-top: 10px;
+      animation: blink 1s infinite;
+    }
+
+    .otp-box {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .otp-box input {
+      width: 50px;
+      text-align: center;
+      font-size: 20px;
+      padding: 12px;
+      border-radius: 10px;
+      background: transparent;
+      border: 2px solid #00FFD1;
+      color: #00FFD1;
+      box-shadow: 0 0 10px #00FFD155;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .otp-box input:focus {
+      border-color: #00ff99;
+      box-shadow: 0 0 15px #00ff99;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <img src="https://cdn-icons-png.flaticon.com/512/2920/2920347.png" class="logo" />
+    <h2 class="typing">Enter OTP</h2>
+    <form action="verify.php" method="POST">
+      <div class="otp-box">
+        <input type="text" maxlength="1" name="otp_digit_1" required oninput="moveToNext(this, 'otp2')">
+        <input type="text" maxlength="1" name="otp_digit_2" id="otp2" required oninput="moveToNext(this, 'otp3')">
+        <input type="text" maxlength="1" name="otp_digit_3" id="otp3" required oninput="moveToNext(this, 'otp4')">
+        <input type="text" maxlength="1" name="otp_digit_4" id="otp4" required>
+      </div>
+      <input type="hidden" name="otp" id="fullOtp">
+      <p class="countdown" id="timer">⏳ OTP expires in: <span id="time">2:00</span></p>
+      
+    <button type="submit" onclick="combineOTP()">Verify OTP</button>
+    </form>
+    <p id="resendLink" style="margin-top: 10px;">
+        <strong>Didn’t receive the OTP?</strong> <a href="resend_otp.php" style="color:#00ff99;">🔁 Resend OTP</a>
+    </p>
+  </div>
+
+  <script>
+    // Auto move to next input
+    function moveToNext(current, nextId) {
+      if (current.value.length === 1) {
+        document.getElementById(nextId)?.focus();
+      }
+    }
+
+    // Combine OTP
+    function combineOTP() {
+      const d1 = document.getElementsByName('otp_digit_1')[0].value;
+      const d2 = document.getElementsByName('otp_digit_2')[0].value;
+      const d3 = document.getElementsByName('otp_digit_3')[0].value;
+      const d4 = document.getElementsByName('otp_digit_4')[0].value;
+      document.getElementById('fullOtp').value = d1 + d2 + d3 + d4;
+    }
+
+    // Countdown timer
+    let timeLeft = 120;
+    const timer = document.getElementById("time");
+
+    const interval = setInterval(() => {
+      let mins = Math.floor(timeLeft / 60);
+      let secs = timeLeft % 60;
+      timer.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+      timeLeft--;
+
+      if (timeLeft < 0) {
+        clearInterval(interval);
+        document.querySelector("button").disabled = true;
+        document.getElementById("timer").textContent = "❌ OTP expired. Try again!";
+      }
+    }, 1000);
+    
+  </script>
+</body>
+</html>

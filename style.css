@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Share Tech Mono', monospace;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(to right, #0f0f0f, #090a0f);
+  background-image: url('https://hellofuture.orange.com/wp-content/uploads/sites/56/2021/04/home-HF_GA-1920x1080-CYBERSECU.gif'); /* subtle cyber gif */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #00ffd1;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #00ffd1;
+  box-shadow: 0 0 20px #00ffd1;
+  border-radius: 15px;
+  padding: 30px;
+  width: 350px;
+  animation: fadein 1.5s ease-in;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.typing {
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #00ffd1;
+  animation: typing 2s steps(14), blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0ch; }
+  to { width: 14ch; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  background: transparent;
+  border: 1px solid #00ffd1;
+  color: #00ffd1;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input::placeholder {
+  color: #00ffd199;
+}
+
+input:focus {
+  border-color: #00ff99;
+  box-shadow: 0 0 10px #00ff99;
+}
+
+button {
+  background: #00ffd1;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: #00ff99;
+  box-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
+}
+
+.logo {
+  width: 70px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 5px #00ffd1);
+}
+
+a {
+  color: #00ffd1;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #00ff99;
+  text-decoration: underline;
+}
+
+p {
+  margin-top: 10px;
+  font-size: 14px;
+}
